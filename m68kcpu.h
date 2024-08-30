@@ -279,7 +279,12 @@ typedef uint32 uint64;
 #endif /* M68K_INT_GT_32_BIT || M68K_USE_64_BIT */
 
 /* Simulate address lines of 68k family */
+/* A hack for the Q68 core */
+#ifdef Q68_EMU
+#define ADDRESS_68K(A) ((A)>0xFE800000?(A):(A)&(0x01000000 | CPU_ADDRESS_MASK))
+#else
 #define ADDRESS_68K(A) ((A)&CPU_ADDRESS_MASK)
+#endif /* Q68_EMU */
 
 
 /* Shift & Rotate Macros. */
